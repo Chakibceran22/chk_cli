@@ -2,9 +2,9 @@
 use cliclack::{intro, select};
 
 use crate::types::app_options::Appoptions;
-use crate::backend::backend_entry::backend_entry;
+use crate::backend::backend_entry::backend_run;
 use crate::utils::utils::get_project_name;
-pub fn cli()  -> std::io::Result<()>{
+pub fn cli()  -> anyhow::Result<()>{
     intro("Welcome to the Chk CLI")?;
     let app_choice = select("Choose your app option.")
     .item(Appoptions::Backend, "Backend", "Templates starters for backend projects")
@@ -16,7 +16,8 @@ pub fn cli()  -> std::io::Result<()>{
 
     match app_choice {
         Appoptions::Backend => {
-            let _ = backend_entry(&project_name)?;
+             backend_run(&project_name)?;
+
         }
         Appoptions::Frontend => {
 
