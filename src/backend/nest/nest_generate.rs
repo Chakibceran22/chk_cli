@@ -1,4 +1,4 @@
-use anyhow::{ bail};
+use anyhow::{ Context, bail};
 use cliclack::spinner;
 use crate::{ backend::nest::main_template::MainTemplate, types::app_options::{NestAdditionalPackages::{self, ClassValidatorAndransformer, Helmet}, NodePackageManagerOptions::{self, Npm, Pnpm, Yarn}}};
 use std::process::Command;
@@ -45,7 +45,7 @@ pub fn nest_generate(project_name: &str, git_choice: bool, package_manager: Node
         let stderr = String::from_utf8_lossy(&output.stderr);
         bail!("Nest CLI failed:\n{stdout}\n{stderr}");
     }
-    std::fs::write(format!("{project_name}/src/main.ts"), main_ts);
+    std::fs::write(format!("{project_name}/src/main.ts"), main_ts).with_context(|| format!("Couldn't write {project_name}/nest/mains.ts"))?;
     sp.stop(format!("NestJS project '{project_name}' initialized!"));
     
     Ok(())

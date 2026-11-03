@@ -1,5 +1,5 @@
 
-use cliclack::{intro, select};
+use cliclack::{intro};
 
 use crate::shared::prompts::{prompt_app_choices, prompt_project_name};
 use crate::types::app_options::Appoptions;

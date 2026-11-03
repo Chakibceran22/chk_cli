@@ -10,7 +10,7 @@ pub fn backend_run(project_name : &str) -> anyhow::Result<()>{
     match backend_choice {
         BackendOptions::Nest => {
             let package_manager = prompt_node_package_manager_option()?;
-            check_node_package_manager_installed(package_manager);
+            check_node_package_manager_installed(package_manager)?;
             let git_choice = prompt_should_use_git()?;
             let additional_packages = nest_additional_packages()?;
 
