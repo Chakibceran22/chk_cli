@@ -1,0 +1,26 @@
+import { NestFactory } from '@nestjs/core';
+import { AppModule } from './app.module.js';
+{%- if validation %}
+import { ValidationPipe } from '@nestjs/common';
+{%- endif %}
+{%- if helmet %}
+import helmet from 'helmet';
+{%- endif %}
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+{%- if helmet %}
+  app.use(helmet());
+{%- endif %}
+{%- if validation %}
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
+{%- endif %}
+  await app.listen(process.env.PORT ?? 3000);
+}
+await bootstrap();

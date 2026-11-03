@@ -29,3 +29,11 @@ impl NodePackageManagerOptions {
     }
     
 }
+
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum NestAdditionalPackages {
+    Drizzle,
+    ClassValidatorAndransformer,
+    Helmet
+}

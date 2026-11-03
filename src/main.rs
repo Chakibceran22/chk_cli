@@ -2,15 +2,15 @@
 
 
 use std::process::ExitCode;
-
-use crate::{entrypoint::cli, utils::utils::is_cancelled};
-mod entrypoint;
+mod cli;
+use crate::{cli::main_runner, utils::utils::is_cancelled};
 mod types;
 mod backend;
 mod utils;
+mod shared;
 
 pub fn main() -> ExitCode {
-    match cli() {
+    match main_runner() {
         Ok(()) => ExitCode::SUCCESS,
         Err(err) if is_cancelled(&err) => {
             let _ = cliclack::outro_cancel("Cancelled");

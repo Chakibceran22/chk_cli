@@ -5,4 +5,5 @@ edition = "2024"
 
 [dependencies]
 anyhow = "1.0.104"
+askama = "0.16.1"
 cliclack = "0.5.7"
